@@ -1,13 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('Example Username/Password') {
-            environment {
-                richa = credentials('dvp1gitid')
+        stage('Example') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
             }
             steps {
-                sh 'echo "Service user is $richa_USR"'
-                sh 'echo "Service password is $richa_PSW"'
+                echo "Hello, ${PERSON}, nice to meet you."
             }
         }
     }
