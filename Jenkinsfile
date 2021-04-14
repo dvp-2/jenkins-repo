@@ -1,42 +1,33 @@
 pipeline {
     agent any
-    stages {
-        stage('Non-Parallel Stage') {
-            steps {
-                echo 'This stage will be executed first.'
-            }
-        }
-        stage('Parallel Stage') {
-            failFast true
-            parallel {
-                stage('Branch A') {
-                   
-                    steps {
-                        echo "On Branch A"
-                    }
-                }
-                stage('Branch B') {
-                
-                    steps {
-                        echo "On Branch B"
-                    }
-                }
-                stage('Branch C') {
+ stages {
+  stage('Docker Build and Tag') {
+           steps {
               
-                    stages {
-                        stage('Nested 1') {
-                            steps {
-                                echo "In stage Nested 1 within Branch C"
-                            }
-                        }
-                        stage('Nested 2') {
-                            steps {
-                                echo "In stage Nested 2 within Branch C"
-                            }
-                        }
-                    }
-                }
+                sh 'docker build -t nginxtest:$BUILD_NUMBER .' 
+                sh 'docker tag nginxtest:$BUILD_NUMBER dvp1/nginx-jenkins:$BUILD_NUMBER'
+               
+          }
+        }
+     
+  stage('Publish image to Docker Hub') {
+          
+            steps {
+          withDockerRegistry([ credentialsId: "dockerhubcred", url: "" ]) {
+       
+          sh  'docker push dvp1/nginx-jenkins:$BUILD_NUMBER' 
+        }
+                  
+          }
+        }
+     
+      stage('Run Docker container on Jenkins Agent') {
+             
+            steps {
+                sh "docker run -d -p 4030:80 nginxtest:$BUILD_NUMBER"
+ 
             }
         }
+ 
     }
 }
