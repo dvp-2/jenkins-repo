@@ -1,20 +1,16 @@
 pipeline {
     agent any
+    environment { 
+        CC = 'clang'
+    }
     stages {
         stage('Example') {
-            steps { 
-                echo 'Hello World'
+            environment { 
+                AN_ACCESS_KEY = credentials('my-secret-text') 
             }
-        }
-        stage('AADU') {
             steps {
-                echo 'Hii, AAdu'
+                sh 'printenv'
             }
-        }
-    }
-    post {
-        always {
-            echo " Hii this is a post action "
         }
     }
 }
