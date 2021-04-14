@@ -4,8 +4,8 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'sudo docker build -t -S nginxtest:$BUILD_NUMBER .' 
-                sh 'sudo docker tag nginxtest:$BUILD_NUMBER dvp1/nginx-jenkins:$BUILD_NUMBER'
+                sh 'docker build -t -S nginxtest:$BUILD_NUMBER .' 
+                sh 'docker tag nginxtest:$BUILD_NUMBER dvp1/nginx-jenkins:$BUILD_NUMBER'
                
           }
         }
