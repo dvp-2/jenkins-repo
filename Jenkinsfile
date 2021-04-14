@@ -1,16 +1,13 @@
 pipeline {
     agent any
-    environment { 
-        CC = 'clang'
-    }
     stages {
-        stage('Example') {
-            environment { 
-                AN_ACCESS_KEY = credentials('my-secret-text') 
+        stage('Example Username/Password') {
+            environment {
+                richa = credentials('dvp1gitid')
             }
             steps {
-                sh 'printenv'
-                sh 'echo "Secret key is $AN_ACCESS_KEY"'
+                sh 'echo "Service user is $richa_USR"'
+                sh 'echo "Service password is $richa_PSW"'
             }
         }
     }
