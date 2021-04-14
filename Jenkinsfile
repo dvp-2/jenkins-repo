@@ -14,7 +14,7 @@ pipeline {
     }
     post {
         always {
-            echo " Hii this is a post action
+            echo " Hii this is a post action "
         }
     }
 }
