@@ -10,6 +10,7 @@ pipeline {
             }
             steps {
                 sh 'printenv'
+                sh 'echo "Secret key is $AN_ACCESS_KEY"'
             }
         }
     }
