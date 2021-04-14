@@ -15,7 +15,7 @@ pipeline {
             steps {
           withDockerRegistry([ credentialsId: "dockerhubcred", url: "" ]) {
        
-          sh  'sudo docker push dvp1/nginx-jenkins:$BUILD_NUMBER' 
+          sh  'docker push dvp1/nginx-jenkins:$BUILD_NUMBER' 
         }
                   
           }
@@ -24,7 +24,7 @@ pipeline {
       stage('Run Docker container on Jenkins Agent') {
              
             steps {
-                sh "sudo docker run -d -p 4030:80 nginxtest:$BUILD_NUMBER"
+                sh "docker run -d -p 4030:80 nginxtest:$BUILD_NUMBER"
  
             }
         }
