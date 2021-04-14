@@ -5,7 +5,7 @@ pipeline {
            steps {
               
                 sh 'docker build -t nginxtest:8 .' 
-                sh 'docker tag nginxtest:$BUILD_NUMBER dvp1/nginx-jenkins:$BUILD_NUMBER'
+                sh 'docker tag nginxtest:8 dvp1/nginx-jenkins:8'
                
           }
         }
