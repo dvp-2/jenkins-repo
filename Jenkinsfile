@@ -4,8 +4,8 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t nginxtest:8 .' 
-                sh 'docker tag nginxtest:8 dvp1/nginx-jenkins:8'
+                sh 'docker build -t nginxtest:9 .' 
+                sh 'docker tag nginxtest:9 dvp1/nginx-jenkins:8'
                
           }
         }
@@ -15,7 +15,7 @@ pipeline {
             steps {
           withDockerRegistry([ credentialsId: "dockerhubcred", url: "" ]) {
        
-          sh  'docker push dvp1/nginx-jenkins:8' 
+          sh  'docker push dvp1/nginx-jenkins:9' 
         }
                   
           }
@@ -24,7 +24,7 @@ pipeline {
       stage('Run Docker container on Jenkins Agent') {
              
             steps {
-                sh "docker run -d -p 3002:80 nginxtest:8"
+                sh "docker run -d -p 3002:80 nginxtest:9"
  
             }
         }
