@@ -13,10 +13,8 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-          withDockerRegistry([ credentialsId: "dockerhubcred", url: "" ]) {
-       
+          sh 'docker login -u dvp1 -p dvp-1-GIT'
           sh  'docker push dvp1/nginx-jenkins:9' 
-        }
                   
           }
         }
