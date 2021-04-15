@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    source /etc/profile
  stages {
   stage('Docker Build and Tag') {
            steps {
