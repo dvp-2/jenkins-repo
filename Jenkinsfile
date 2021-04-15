@@ -13,9 +13,9 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-          sh 'docker login -u dvp1 -p dvp-1-GIT'
+                withregistry( '','dockerhubcred' ) {
           sh  'docker push dvp1/nginx-jenkins:9' 
-                  
+                }
           }
         }
      
