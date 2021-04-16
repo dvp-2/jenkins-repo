@@ -17,7 +17,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh 'docker login -u $username -p $password'
                     script {
-                    docker.dockerimage.push("9")
+                    docker.push("dvp1/nginxtest:9")
                     }
                 }
           }
