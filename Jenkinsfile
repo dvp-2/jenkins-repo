@@ -5,7 +5,7 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
               
-                def myimage = docker.build("nginxtest:9") 
+                sh 'docker build -t nginxtest:9 .'
                 sh 'docker tag nginxtest:9 dvp1/nginx-jenkins:9'
                
           }
