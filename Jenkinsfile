@@ -15,8 +15,8 @@ pipeline {
           
             steps {
               
-                withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
-                sh 'docker login -u $username -p $password'
+              //  withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
+                sh 'docker login --username dvp1 --password-stdin'
                 sh 'docker push dvp1/nginxtest:9'
                  
                 }
