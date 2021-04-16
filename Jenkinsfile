@@ -5,10 +5,9 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
                script {
-                def dockerimage = docker.build("nginxtest:9")
-               
+                def dockerimage = docker.build("dvp1/nginxtest:9")
                }
-               sh 'docker tag nginxtest:9 dvp1/nginx-jenkins:9'
+           
           }
         }
      
@@ -17,7 +16,9 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh 'docker login -u $username -p $password'
-                    sh 'docker push dvp1/nginx-jenkins:9' 
+                    script {
+                    docker.dockerimage.push("9")
+                    }
                 }
           }
         }
