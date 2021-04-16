@@ -4,10 +4,11 @@ pipeline {
  stages {
   stage('Docker Build and Tag') {
            steps {
-                git branch: '*/*', changelog: false, poll: false, url: 'https://github.com/dvp-2/jenkins-repo.git'
-                sh 'docker build -t nginxtest:9 .'
-                sh 'docker tag nginxtest:9 dvp1/nginx-jenkins:9'
+               script {
+                def dockerimage = docker.build("nginxtest:9")
                
+               }
+               sh 'docker tag nginxtest:9 dvp1/nginx-jenkins:9'
           }
         }
      
