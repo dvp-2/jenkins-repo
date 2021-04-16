@@ -14,15 +14,16 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
                 script {
-                    docker.withRegistry( '', 'dockerhubcred' )
                     dockerimage.push()
+                }
                 }
                // withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
                 // sh 'docker login -u $username -p $password'
                 //sh 'docker push dvp1/nginxtest:9'
                 
-                }
+            }
           }
         
      
