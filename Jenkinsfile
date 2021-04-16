@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    def myimage
  stages {
   stage('Docker Build and Tag') {
            steps {
