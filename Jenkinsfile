@@ -16,7 +16,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh 'docker login -u $username -p $password'
-                    sh  'docker push dvp1/nginx-jenkins:9' 
+                    docker.push('dvp1/nginx-jenkins:9') 
                 }
           }
         }
