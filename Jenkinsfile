@@ -16,11 +16,12 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( '', 'dockerhubcred' )
+                    dockerimage.push()
                 }
                // withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
                 // sh 'docker login -u $username -p $password'
-                sh 'docker push dvp1/nginxtest:9'
-                 
+                //sh 'docker push dvp1/nginxtest:9'
+                
                 }
           }
         
