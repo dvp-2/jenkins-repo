@@ -15,7 +15,7 @@ pipeline {
           
             steps {
                 script {
-                withRegistry('https://hub.docker.com','dockerhubcred') {
+                withRegistry ('https://hub.docker.com','dockerhubcred') {
                 //    sh 'docker login -u $username -p $password'
                 }
                     sh 'docker push dvp1/nginxtest:9'
