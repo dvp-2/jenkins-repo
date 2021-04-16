@@ -15,6 +15,7 @@ pipeline {
           
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    sh 'docker login -u $username -p $password'
                 script {
                     dockerimage.push()
                 }
