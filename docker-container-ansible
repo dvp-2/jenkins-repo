@@ -1,0 +1,17 @@
+---
+- name: Install docker
+  hosts: demo
+  become: yes
+  tasks:
+  - name: Re-create a redis container
+    docker_container:
+      name: nginx-image
+      image: nginx
+
+      state: started
+      recreate: yes
+      exposed_ports:
+       - 8080:80
+      tty: true
+      detach: true
+~
