@@ -5,5 +5,5 @@
   tasks:
   - name: pull
     docker_image:
-      name: dvp1/nginx:9
+      name: dvp1/nginxtest:9
     become: yes
