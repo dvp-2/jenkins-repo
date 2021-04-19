@@ -41,7 +41,7 @@ pipeline {
              label 'ansible-server'
          }
          steps {
-             ansiblePlaybook become: true, credentialsId: 'ansibleserver', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.ini', playbook: 'docker-image-ansible.yml'
+             ansiblePlaybook become: true, credentialsId: 'ansible-node-root', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.ini', playbook: 'docker-image-ansible.yml'
          }
      }
     }
