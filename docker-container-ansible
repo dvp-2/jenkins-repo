@@ -3,10 +3,10 @@
   hosts: demo
   become: yes
   tasks:
-  - name: Re-create a redis container
+  - name: Run a nginx container
     docker_container:
       name: nginx-image
-      image: nginx
+      image: dvp1/nginxtest:9
 
       state: started
       recreate: yes
@@ -14,4 +14,3 @@
        - 8080:80
       tty: true
       detach: true
-~
