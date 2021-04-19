@@ -1,0 +1,9 @@
+---
+- name: Install docker
+  hosts: demo
+  become: yes
+  tasks:
+  - name: pull
+    docker_image:
+      name: dvp1/nginx:9
+    become: yes
