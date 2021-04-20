@@ -38,7 +38,7 @@ pipeline {
         }
      stage('Pull the container') {
          agent {
-             label 'ansible-server'
+             label 'jenkins-node'
          }
          steps {
              ansiblePlaybook become: true, credentialsId: 'ansible-node-root', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.ini', playbook: 'docker-image-ansible.yml'
@@ -46,7 +46,7 @@ pipeline {
      }
      stage('run the container') {
          agent {
-             label 'ansible-server'
+             label 'jenkins-node'
          }
          steps {
              ansiblePlaybook become: true, credentialsId: 'ansible-node-root', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.ini', playbook: 'docker-container-ansible.yml'
