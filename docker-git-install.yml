@@ -6,30 +6,30 @@
     
     - name: Install yum utils
       yum:
-        name: yum-utils
-       	state: latest
+         name: yum-utils
+       	 state: latest
       become: yes
 
     - name: Add repository
       shell:
-	cmd: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+	 cmd: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
       become: yes
     - name: Install docker
       yum:
-        name: docker-ce, docker-ce-cli, containerd.io
-        state: present
+         name: docker-ce, docker-ce-cli, containerd.io
+         state: present
       become: yes
 
     - name: start docker
       service:
-	name: docker
-        state: started
+	 name: docker
+         state: started
       become: yes
     - name: Install Python3
       yum:
-	name: python3
+	 name: python3
       become: yes
     - name: Install SDK
       shell:
-	cmd: pip3 install docker
+	 cmd: pip3 install docker
       become: yes
