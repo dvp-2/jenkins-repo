@@ -1,0 +1,31 @@
+---
+- name: Install docker
+  hosts: demo
+  become: yes
+  tasks:
+    - name: Install git
+      yum:
+	      name: git
+      become: yes
+    
+    - name: Install yum utils
+      yum:
+	      name: yum-utils
+       	state: latest
+      become: yes
+
+    - name: Add repository
+      shell:
+	      cmd: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+        become: yes
+    - name: Install docker
+      yum:
+	      name: docker-ce, docker-ce-cli, containerd.io
+        state: present
+      become: yes
+
+    - name: start docker
+      service:
+	      name: docker
+        state: started
+      become: yes
