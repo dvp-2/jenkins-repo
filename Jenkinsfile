@@ -7,7 +7,7 @@ pipeline {
   stage('Sonar-qube testing') {
            steps {
               
-                withSonarQubeEnv(credentialsId: 'sonar-key') {
+                withSonarQubeEnv('sonar') {
                 sh 'sonar-scanner' 
                 }
               
