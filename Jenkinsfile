@@ -8,7 +8,7 @@ pipeline {
            steps {
               
                 withSonarQubeEnv('sonar') {
-                sh '/opt/sonar-scanner-4.6.0.2311-macosx/bin/sonar-scanner' 
+                sh '/opt/sonar-scanner-4.6.0.2311-macosx/bin/sonar-scanner -Dsonar.projectKey=sample-test' 
                 }
               
            
