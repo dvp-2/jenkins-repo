@@ -4,26 +4,33 @@ pipeline {
     }
    
  stages {
-  stage('Sonar-qube testing') {
-           steps {
+        stage('Sonar-qube testing') {
+            steps {
               
                 withSonarQubeEnv('sonar') {
                 sh 'sonar-scanner -Dsonar.projectKey=sample-test' 
                 }
               
            
-          }
-
-  stage('Docker Build and Tag') {
-           steps {
-               script {
-                def dockerimage = docker.build("dvp1/nginxtest:9")
-               }
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        stage('Docker Build and Tag') {
+            steps {
+                script {
+                    def dockerimage = docker.build("dvp1/nginxtest:9")
+                }
            
-          }
+            }
         }
      
-  stage('Publish image to Docker Hub') {
+        stage('Publish image to Docker Hub') {
           
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'password', usernameVariable: 'username')]) {
@@ -36,10 +43,10 @@ pipeline {
                     sh 'docker push dvp1/nginxtest:9'
                 
             }
-          }
+        }
         
      
-      stage('Run Docker container on Jenkins Agent') {
+        stage('Run Docker container on Jenkins Agent') {
              
             steps {
                 sh "docker run -d -p 3002:80 dvp1/nginxtest:9"
@@ -63,5 +70,4 @@ pipeline {
     //     }
     // }
     }
-}
 }
