@@ -4,6 +4,16 @@ pipeline {
     }
    
  stages {
+  stage('Sonar-qube testing') {
+           steps {
+              
+                withSonarQubeEnv(credentialsId: 'sonar-key') {
+                sh 'sonar-scanner' 
+                }
+              
+           
+          }
+        }
   stage('Docker Build and Tag') {
            steps {
                script {
@@ -36,21 +46,21 @@ pipeline {
  
             }
         }
-     stage('Pull the container') {
-         agent {
-             label 'jenkins-node'
-         }
-         steps {
-             ansiblePlaybook become: true, credentialsId: 'ansible-node-root', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.ini', playbook: 'docker-image-ansible.yml'
-         }
-     }
-     stage('run the container') {
-         agent {
-             label 'jenkins-node'
-         }
-         steps {
-             ansiblePlaybook become: true, credentialsId: 'ansible-node-root', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.ini', playbook: 'docker-container-ansible.yml'
-         }
-     }
+    // stage('Pull the container') {
+    //     agent {
+    //         label 'jenkins-node'
+    //     }
+    //     steps {
+    //         ansiblePlaybook become: true, credentialsId: 'ansible-node-root', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.ini', playbook: 'docker-image-ansible.yml'
+    //     }
+    // }
+    // stage('run the container') {
+    //     agent {
+    //         label 'jenkins-node'
+    //     }
+    //     steps {
+    //        ansiblePlaybook become: true, credentialsId: 'ansible-node-root', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.ini', playbook: 'docker-container-ansible.yml'
+    //     }
+    // }
     }
 }
